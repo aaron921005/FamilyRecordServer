@@ -12,7 +12,31 @@
  */
 class userlife extends spController
 {
-    
+    /**
+     * 查询生活API通过id
+     */
+    function apibyid(){
+        //echo "<meta http-equiv='Content-Type'' content='text/html; charset=utf-8'>";
+        $lib_userlife = spClass("lib_userlife");
+
+        if ($this->spArgs("id")){
+            $condition = array(
+                                "id"=>$this->spArgs("id")
+                                );
+            $result = $lib_userlife->find($condition);
+            if($result)
+            {
+            echo json_encode(array('Success' => true,'data' => $result));//返回文件出错信息
+            }
+            else
+            {
+            echo json_encode(array('Success' => false,'result' => '没有数据'));//返回文件出错信息
+            }
+        }else{
+            echo json_encode(array('Success' => false,'result' => '用户ID不存在'));//返回文件出错信息
+        }
+        
+    }
     /**
      * 查询所有的生活API1
      */
@@ -54,6 +78,7 @@ class userlife extends spController
             echo json_encode(array('Success' => false,'result' => '用户ID不存在'));//返回文件出错信息
         }
     }
+    //保存生活
     function lifeSave(){
 
         $lib_userlife = spClass("lib_userlife");
@@ -65,6 +90,7 @@ class userlife extends spController
                             'userid' => $this->spArgs("userid"),
                             'content' => $this->spArgs("content"),
                             'files' => $this->spArgs("files"),
+                            'video' => $this->spArgs("video"),
                             'remarks' => $this->spArgs("remarks"),
                             'createtime' => $this->spArgs("createtime")
                             );
