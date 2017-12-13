@@ -14,7 +14,7 @@ class userlife extends spController
 {
     
     /**
-     * 查询所有的生活API
+     * 查询所有的生活API1
      */
     function apiall(){
         //echo "<meta http-equiv='Content-Type'' content='text/html; charset=utf-8'>";
