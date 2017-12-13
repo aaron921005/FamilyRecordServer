@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><{$title}> - <{$smarty.const.WEBNAME}></title>
+<link href="tpl/admin/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="tpl/admin/css/jquery.min.js"></script>
+<link href="tpl/admin/css/Bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="tpl/admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="tpl/admin/css/Bootstrap/js/bootstrap.min.js"></script>
+<script language="javascript" type="text/javascript">
+ function cheackbook(){
+	var form=document.myform;
+	if (form.name.value.replace(/ /g,"")==""){
+    alert("姓名不能为空，请重新填写！");
+    form.name.focus();
+    return false;
+    }
+  if (form.birthdate.value.replace(/ /g,"")==""){
+    alert("出生日期不能为空，请重新填写！");
+    form.birthdate.focus();
+    return false;
+    }
+
+	}
+</script>
+</head>
+
+<body>
+<!--admin-bread-->
+<div class="admin-bread">
+  <span class="fr">
+    <{include file="admin/index/smalltop.html"}>
+  </span>
+  
+  <ul class="fl">
+      <li><a href="<{spUrl c=admin a=content}>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 开始</a></li>
+      <li>/</li>
+      <li><a href="<{spUrl c=user_baby a=ListAdmin}>">帐号列表</a></li>
+      <li>/</li>
+      <li><{$title}></li>
+  </ul>
+</div><!--admin-bread End-->
+
+<!--content-->
+<div class="content">
+<form name="myform" onsubmit="return cheackbook();" id="myform" method="post" action="<{spUrl c=user_baby a=update id=$model.id}>">
+
+<input name="userid" type="hidden" id="userid" value="<{$model.userid}>" />
+<div class="form-group">
+  <label for="name">姓名：</label>
+  <input name="name" type="test" class="form-control" id="name" value="<{$model.name}>">
+</div>
+
+<div class="form-group">
+  <label for="birthdate">出生日期：</label>
+  <div class="input-group date form_datetime col-md-12" data-date="<{$model.birthdate}>" data-date-format="dd MM yyyy - HH:ii p" data-link-field="birthdate">
+    <input class="form-control" size="16" type="text" value="<{$model.birthdate}>" readonly>
+    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+  </div>
+  <input name="birthdate" type="hidden" class="form-control" id="birthdate" value="<{$model.birthdate}>">
+</div>
+
+<div class="form-group">
+  <label for="sex">性别：</label>
+  <select name="sex" id="sex"  class="form-control">
+  <option value="<{$model.sex}>" selected="selected">当前：<{$model.sex}></option>
+  <option value="男孩" selected="selected">男孩</option>
+  <option value="女孩">女孩</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="height">身高(cm)：</label>
+  <input name="height" type="number" class="form-control" id="height" value="<{$model.height}>">
+</div>
+
+<div class="form-group">
+  <label for="weight">体重(斤)：</label>
+  <input name="weight" type="number" class="form-control" id="weight" value="<{$model.weight}>">
+</div>
+
+<div class="form-group">
+  <label for="remarks">备注：</label>
+  <textarea id="remarks"  name="remarks" class="form-control" rows="3" ><{$model.remarks}></textarea>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <button type="submit" name="submit" value="确认修改" class="btn btn-success navbar-btn"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> 确认修改</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="reset" value="重置" class="btn btn-default" />
+  </div>
+</nav>
+
+</form>
+</div><!--content End-->
+<script type="text/javascript" src="tpl/admin/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="tpl/admin/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript">
+  $(function(){
+    
+  })
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+        showMeridian: 1
+    });
+</script>
+</body>
+</html>
