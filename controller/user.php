@@ -39,9 +39,10 @@ class user extends spController
         $lib_user = spClass("lib_user");
 		if ($this->spArgs("openid")){
 			$condition = array("openid"=>$this->spArgs("openid"));
-			$result = $lib_user->find($condition);
+			$result = $lib_user->spLinker()->find($condition);
 			if($result)
 			{
+				// $result=>remarks='欢迎您';
 				echo json_encode($result);
 			}
 			else
@@ -63,7 +64,7 @@ class user extends spController
 			$result = $lib_user->find($condition);
 			if($result)
 			{
-			echo null;
+				echo null;
 			}
 			else
 			{
@@ -72,6 +73,7 @@ class user extends spController
 								'password' => md5($this->spArgs("password")),
 								'admin' => $this->spArgs("admin"),
 								'wxname' => $this->spArgs("wxname"),
+								'wxhead' => $this->spArgs("wxhead"),
 								'openid' => $this->spArgs("openid"),
 								'sex' => $this->spArgs("sex"),
 								'time' => date("Y-m-d h:i:sa")

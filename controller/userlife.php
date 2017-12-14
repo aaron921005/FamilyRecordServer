@@ -23,7 +23,7 @@ class userlife extends spController
             $condition = array(
                                 "id"=>$this->spArgs("id")
                                 );
-            $result = $lib_userlife->find($condition);
+            $result = $lib_userlife->spLinker()->find($condition);
             if($result)
             {
             echo json_encode(array('Success' => true,'data' => $result));//返回文件出错信息
@@ -43,7 +43,7 @@ class userlife extends spController
     function apiall(){
         //echo "<meta http-equiv='Content-Type'' content='text/html; charset=utf-8'>";
         $lib_userlife = spClass("lib_userlife");
-        $result = $lib_userlife->findAll(null,'createtime desc');
+        $result = $lib_userlife->spLinker()->spPager($this->spArgs('page', $this->spArgs("page")), $this->spArgs("pageSize"))->findAll(null,'createtime desc');
         if($result)
         {
         echo json_encode(array('Success' => true,'data' => $result));//返回文件出错信息
@@ -65,7 +65,7 @@ class userlife extends spController
             $condition = array(
                                 "userid"=>$this->spArgs("userid")
                                 );
-            $result = $lib_userlife->findAll($condition,'createtime desc');
+            $result = $lib_userlife->spLinker()->spPager($this->spArgs('page', $this->spArgs("page")), $this->spArgs("pageSize"))->findAll($condition,'createtime desc');
             if($result)
             {
             echo json_encode(array('Success' => true,'data' => $result));//返回文件出错信息

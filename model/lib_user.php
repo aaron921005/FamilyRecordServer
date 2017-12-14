@@ -4,6 +4,25 @@ class lib_user extends spModel
   var $pk = "id"; // 数据表的主键
   var $table = "user"; // 数据表的名称
   
+	 // 由spModel的变量$linker来设置表间关联
+        var $linker = array(
+                array(
+                        'type' => 'hasmany',   // 一对多关联
+                        'map' => 'life',    // 关联的标识
+                        'mapkey' => 'id', 
+                        'fclass' => 'lib_userlife',
+                        'fkey' => 'userid',
+                        'enabled' => true
+                ),
+                array(
+                        'type' => 'hasmany',   // 一对多关联
+                        'map' => 'baby',    // 关联的标识
+                        'mapkey' => 'id', 
+                        'fclass' => 'lib_user_baby',
+                        'fkey' => 'userid',
+                        'enabled' => true
+                ),
+        );	
  	 /**
 	 * 这里我们建立一个成员函数来进行用户登录验证
 	 *
@@ -23,6 +42,8 @@ class lib_user extends spModel
 			// 找不到匹配记录，用户名或密码错误，返回false
 			return false;
 		}
-	}		
+	}	
+
+
 		
 }
