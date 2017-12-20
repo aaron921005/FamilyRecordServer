@@ -34,6 +34,30 @@ class user_babynurse extends spController
 	/**
 	 * 查询用户当前的宝宝喂奶信息API
 	 */
+	function apibyuseridasc(){
+		//echo "<meta http-equiv='Content-Type'' content='text/html; charset=utf-8'>";
+        $lib_user_babynurse = spClass("lib_user_babynurse");
+		if ($this->spArgs("userid") && $this->spArgs("user_babyid")){
+			$condition = array(
+								"userid"=>$this->spArgs("userid"),
+								"user_babyid"=>$this->spArgs("user_babyid")
+								);
+			$result = $lib_user_babynurse->findAll($condition,'createtime');
+			if($result)
+			{
+				echo json_encode($result);
+			}
+			else
+			{
+				echo null;
+			}
+		}else{
+			echo null;
+		}
+	}
+	/**
+	 * 查询用户当前的宝宝喂奶信息API
+	 */
 	function apibyuserid(){
 		//echo "<meta http-equiv='Content-Type'' content='text/html; charset=utf-8'>";
         $lib_user_babynurse = spClass("lib_user_babynurse");
